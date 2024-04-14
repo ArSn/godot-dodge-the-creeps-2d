@@ -13,3 +13,4 @@ jobs:
         uses: ceceppa/godot-gut-ci@main
         with:
           godot_version: 4.2.1
+          gut_params: -gdir=res://test
