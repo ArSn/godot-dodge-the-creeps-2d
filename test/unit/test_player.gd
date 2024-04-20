@@ -106,3 +106,31 @@ func test_position_does_not_exit_screen():
 	_sender.action_down("move_up").wait_frames(10)
 	await(_sender.idle)
 	assert_eq(player.position.y, 0, "Player should not exit screen up")
+	
+func test_animation_is_walk_when_movement_is_horizontal():
+	var player = add_child_autofree(Player.instantiate())
+	var sprite: AnimatedSprite2D = player.get_node("AnimatedSprite2D")
+
+	_sender.action_down("move_right").wait_frames(10)
+	await(_sender.idle)
+	assert_eq(sprite.animation, "walk", "Player should play walk animation when moving right")
+	_sender.release_all()
+	_sender.clear()
+
+	_sender.action_down("move_left").wait_frames(10)
+	await(_sender.idle)
+	assert_eq(sprite.animation, "walk", "Player should play walk animation when moving left")
+
+func test_animation_is_up_when_movement_is_vertical():
+	var player = add_child_autofree(Player.instantiate())
+	var sprite: AnimatedSprite2D = player.get_node("AnimatedSprite2D")
+
+	_sender.action_down("move_down").wait_frames(10)
+	await(_sender.idle)
+	assert_eq(sprite.animation, "up", "Player should play up animation when moving down")
+	_sender.release_all()
+	_sender.clear()
+
+	_sender.action_down("move_up").wait_frames(10)
+	await(_sender.idle)
+	assert_eq(sprite.animation, "up", "Player should play up animation when moving up")
