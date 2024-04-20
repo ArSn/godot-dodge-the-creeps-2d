@@ -73,3 +73,36 @@ func test_stop_animation_when_having_stopped():
 	await(_sender.idle)
 	assert_false(sprite.is_playing(), "Player should stop animation after stopping")
 	
+func test_position_does_not_exit_screen():
+	var player = add_child_autofree(Player.instantiate())
+	var screen_size: Vector2 = player._screen_size
+
+	# Move player to the right
+	player.position.x = screen_size.x - 5
+	_sender.action_down("move_right").wait_frames(10)
+	await(_sender.idle)
+	assert_eq(player.position.x, screen_size.x, "Player should not exit screen to the right")
+	_sender.release_all()
+	_sender.clear()
+
+	# Move player to the left
+	player.position.x = 5
+	_sender.action_down("move_left").wait_frames(10)
+	await(_sender.idle)
+	assert_eq(player.position.x, 0, "Player should not exit screen to the left")
+	_sender.release_all()
+	_sender.clear()
+
+	# Move player down
+	player.position.y = screen_size.y - 5
+	_sender.action_down("move_down").wait_frames(10)
+	await(_sender.idle)
+	assert_eq(player.position.y, screen_size.y, "Player should not exit screen down")
+	_sender.release_all()
+	_sender.clear()
+
+	# Move player up
+	player.position.y = 5
+	_sender.action_down("move_up").wait_frames(10)
+	await(_sender.idle)
+	assert_eq(player.position.y, 0, "Player should not exit screen up")
