@@ -134,3 +134,28 @@ func test_animation_is_up_when_movement_is_vertical():
 	_sender.action_down("move_up").wait_frames(10)
 	await(_sender.idle)
 	assert_eq(sprite.animation, "up", "Player should play up animation when moving up")
+	
+func test_start_positions_and_enables_the_player():
+	var player = add_child_autofree(Player.instantiate())
+	var collider: CollisionShape2D = player.get_node("CollisionShape2D")
+	
+	var custom_position: Vector2 = Vector2(100, 100);
+	
+	player.start(custom_position)
+
+	assert_eq(player.position, custom_position, "Player should start at position (100, 100)")
+	assert_true(player.is_visible(), "Player should be visible")
+	assert_false(collider.disabled, "Player collider should be enabled")
+	
+func test_dies_on_body_entered():
+	var player = add_child_autofree(Player.instantiate())
+	var collider: CollisionShape2D = player.get_node("CollisionShape2D")
+	
+	var mockBody: Node2D = Node2D.new()
+	watch_signals(player)
+	player._on_body_entered(mockBody)
+	await wait_frames(10)
+	assert_signal_emitted(player, "hit")
+	
+	assert_false(player.is_visible(), "Player should not be visible")
+	assert_true(collider.disabled, "Player collider should be disabled")
