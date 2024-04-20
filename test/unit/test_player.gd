@@ -78,7 +78,7 @@ func test_position_does_not_exit_screen():
 	var screen_size: Vector2 = player._screen_size
 
 	# Move player to the right
-	player.position.x = screen_size.x - 5
+	player.position.x = screen_size.x - 5.0
 	_sender.action_down("move_right").wait_frames(10)
 	await(_sender.idle)
 	assert_eq(player.position.x, screen_size.x, "Player should not exit screen to the right")
@@ -86,15 +86,15 @@ func test_position_does_not_exit_screen():
 	_sender.clear()
 
 	# Move player to the left
-	player.position.x = 5
+	player.position.x = 5.0
 	_sender.action_down("move_left").wait_frames(10)
 	await(_sender.idle)
-	assert_eq(player.position.x, 0, "Player should not exit screen to the left")
+	assert_eq(player.position.x, 0.0, "Player should not exit screen to the left")
 	_sender.release_all()
 	_sender.clear()
 
 	# Move player down
-	player.position.y = screen_size.y - 5
+	player.position.y = screen_size.y - 5.0
 	_sender.action_down("move_down").wait_frames(10)
 	await(_sender.idle)
 	assert_eq(player.position.y, screen_size.y, "Player should not exit screen down")
@@ -102,10 +102,10 @@ func test_position_does_not_exit_screen():
 	_sender.clear()
 
 	# Move player up
-	player.position.y = 5
+	player.position.y = 5.0
 	_sender.action_down("move_up").wait_frames(10)
 	await(_sender.idle)
-	assert_eq(player.position.y, 0, "Player should not exit screen up")
+	assert_eq(player.position.y, 0.0, "Player should not exit screen up")
 	
 func test_animation_is_walk_when_movement_is_horizontal():
 	var player = add_child_autofree(Player.instantiate())
@@ -151,7 +151,7 @@ func test_dies_on_body_entered():
 	var player = add_child_autofree(Player.instantiate())
 	var collider: CollisionShape2D = player.get_node("CollisionShape2D")
 	
-	var mockBody: Node2D = Node2D.new()
+	var mockBody: Node2D = autofree(Node2D.new())
 	watch_signals(player)
 	player._on_body_entered(mockBody)
 	await wait_frames(10)
