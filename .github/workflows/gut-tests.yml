@@ -10,7 +10,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run the tests
-        uses: arsn/godot-gut-ci@fix-catch-no-tests
+        uses: ceceppa/godot-gut-ci@main
         with:
           godot_version: 4.2.1
           gut_params: -gdir=res://test -ginclude_subdirs=true
