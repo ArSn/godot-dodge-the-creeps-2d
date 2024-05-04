@@ -12,5 +12,5 @@ jobs:
       - name: Run the tests
         uses: ceceppa/godot-gut-ci@main
         with:
-          godot_version: 4.2.1
+          godot_version: 4.2.2
           gut_params: -gdir=res://test -ginclude_subdirs=true
