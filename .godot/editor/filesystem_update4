@@ -1,5 +1,3 @@
 res://hud.tscn
 res://main.tscn
 res://player.tscn
-res://test/unit/test_player.gd
-res://test/unit/test_hud.gd
