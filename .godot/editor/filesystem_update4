@@ -1,4 +1,5 @@
 res://hud.tscn
 res://main.tscn
 res://player.tscn
-res://main.gd
+res://mob.tscn
+res://test/unit/test_main.gd
