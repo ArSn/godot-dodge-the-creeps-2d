@@ -103,5 +103,23 @@ func test_on_start_timer_timeout_starts_the_timers():
 	assert_false( main.get_node("ScoreTimer").is_stopped() )
 	assert_false( main.get_node("MobTimer").is_stopped() )
 	
+func test__on_mob_timer_timeout_adds_new_mob():
+	var main = TestMain.instantiate()
+	add_child_autoqfree(main)
+	
+	var mobs = get_tree().get_nodes_in_group("mobs")
+	
+	# We should start off with no mobs
+	assert_same( mobs.size(), 0 )
+		
+	# Act
+	main._on_mob_timer_timeout()
+	mobs = get_tree().get_nodes_in_group("mobs")
+	assert_same( mobs.size(), 1 )
+	
+	main._on_mob_timer_timeout()
+	mobs = get_tree().get_nodes_in_group("mobs")
+	assert_same( mobs.size(), 2 )
+	
 
 	
