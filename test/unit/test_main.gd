@@ -72,7 +72,25 @@ func test_game_over_stops_timers_and_shows_game_over_hud():
 	assert_true( main.get_node("ScoreTimer").is_stopped() )
 	assert_true( main.get_node("MobTimer").is_stopped() )
 
+func test_on_score_timer_timeout_increases_score_by_one_in_hud():
+	var main = TestMain.instantiate()
+	add_child_autoqfree(main)
 	
+	# Mock the HUD
+	var Hud = load('res://hud.gd')
+	var HudDouble = double(Hud)
+	var hud_double = HudDouble.new()
+	hud_double.set_name("HUD")
+	main.get_node("HUD").free()
+	main.add_child(hud_double)
+	
+	main.score = 1337
+	
+	# Act
+	main._on_score_timer_timeout()	
+	
+	# Verify things are called
+	assert_call_count(hud_double, "update_score", 1, [ 1338 ])
 	
 
 	
