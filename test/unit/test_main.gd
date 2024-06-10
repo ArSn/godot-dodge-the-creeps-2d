@@ -92,5 +92,16 @@ func test_on_score_timer_timeout_increases_score_by_one_in_hud():
 	# Verify things are called
 	assert_call_count(hud_double, "update_score", 1, [ 1338 ])
 	
+func test_on_start_timer_timeout_starts_the_timers():
+	var main = TestMain.instantiate()
+	add_child_autoqfree(main)
+	
+	# Act
+	main._on_start_timer_timeout()	
+	
+	# Verify things are called
+	assert_false( main.get_node("ScoreTimer").is_stopped() )
+	assert_false( main.get_node("MobTimer").is_stopped() )
+	
 
 	
