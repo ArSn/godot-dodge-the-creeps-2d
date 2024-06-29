@@ -47,6 +47,9 @@ func test_new_game_starts_new_game():
 	# Verify the mobs have been cleared out
 	assert_true( get_tree().get_nodes_in_group("mobs").size() == 0, "There should be 2 mobs" )
 	
+	# Assert music is playing
+	assert_true( main.get_node("Music").is_playing() )
+	
 func test_game_over_stops_timers_and_shows_game_over_hud():
 	var main = TestMain.instantiate()
 	add_child_autoqfree(main)
@@ -65,6 +68,9 @@ func test_game_over_stops_timers_and_shows_game_over_hud():
 	
 	# Act
 	main.game_over()
+	
+	assert_false( main.get_node("Music").is_playing() )
+	assert_true( main.get_node("DeathSound").is_playing() )
 	
 	# Verify things are called
 	assert_call_count(hud_double, "show_game_over", 1)

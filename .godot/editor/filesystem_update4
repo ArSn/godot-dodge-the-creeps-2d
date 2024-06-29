@@ -6,3 +6,4 @@ res://main.gd
 res://test/unit/test_hud.gd
 res://test/unit/test_player.gd
 res://addons/gut/test.gd
+res://test/unit/test_main.gd
