@@ -1,9 +1,8 @@
-res://hud.gd
-res://main.gd
-res://test/unit/test_main.gd
-res://test/unit/test_hud.gd
-res://test/unit/test_player.gd
-res://addons/gut/test.gd
 res://hud.tscn
 res://main.tscn
 res://player.tscn
+res://hud.gd
+res://main.gd
+res://test/unit/test_hud.gd
+res://test/unit/test_player.gd
+res://addons/gut/test.gd
